@@ -2,8 +2,12 @@ package com.ohgiraffers.requestmapping;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
+// view 인 index.html 에서 httpRequest 를 받고 Controller 에서 httpResponse 를 반환한다. ★
 /* comment.
 *   Spring Boot 는 Servlet 이 내장되어있다.
 *   지금까지는 요청을 처리 할 서블릿이 동작했다면
@@ -15,6 +19,8 @@ public class MethodMappingController {
     /* 1. 메소드 방식 미지정 */
     // 사용자의 요청을 매칭시킬 메소드
     // index.html 의 button url 입력, 사용자가 버튼을 누르면 메소드가 동작
+    // RequestMapping 어노테이션은 URL 만 일치하면 모든 방식(get, post)의
+    // 요청을 처리하는 Servlet 으로 치면 service 와 같은 메소드이다.
     @RequestMapping("/menu/regist")
     public String registMenu(Model model){
 
@@ -29,8 +35,49 @@ public class MethodMappingController {
         *   Controller 계층의 마지막 임무는 사용자에게 어떻게 응답을 해줄 것인지이다.
         *   메소드의 반환 타입을 String 으로 지정해서 문자열을 전달하면
         *   resources/templates 하위 경로의 파일을 탐색하게 된다.
+        *   templates 하위에 있지 않으면 찾을 수 없다.
+        *   동적으로 값을 넣는 것은 꼭 templates 에 있어야 한다.
         * */
         return "mappingResult";
     }
+
+    /* 2. 메소드 방식 지정 */
+    // 요청 URL 을 value 속성, 요청 방식을 method 속성에 지정
+    // GET 방식의 요청만 받게 명시 하였기 때문에 URL 이 같더라도
+    // POST 방식의 요청은 받을 수 없다.
+    @RequestMapping(value = "/menu/modify", method = RequestMethod.GET)
+    public String modifyMenu(Model model){
+
+        model.addAttribute("message", "GET 방식만 허용하는 메뉴 수정 핸들러 메소드 호출됨...");
+
+        return "mappingResult";
+    }
+
+    /* comment.
+    *   @RequestMapping 만 쓰게 되면
+    *   항상 메소드 방식을 지정해주고 value 도 작성해야한다.
+    *   따라서 요청 메소드 전용 어노테이션을 제공하여 번거로운 작업을 안하게 도와준다.
+    *     요청 메소드      어노테이션
+    *        POST       @PostMapping
+    *        GET        @GetMapping
+    *        PUT        @PutMapping
+    *      DELETE       @DeleteMapping */
+
+    @GetMapping("/menu/delete")
+    public String getDeleteMenu(Model model){
+
+        model.addAttribute("message", "GET 방식의 메뉴 삭제용 핸들러 메소드 호출됨...");
+
+        return "mappingResult";
+    }
+
+    @PostMapping("/menu/delete")
+    public String postDeleteMenu(Model model){
+
+        model.addAttribute("message", "POST 방식의 메뉴 삭제용 핸들러 메소드 호출됨...");
+
+        return "mappingResult";
+    }
+
 
 }
