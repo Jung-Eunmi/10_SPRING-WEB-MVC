@@ -4,12 +4,15 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
 @Controller
 @RequestMapping("/request/*")
+// 4-2 @SessionAttribute 이용한 값 유지
+@SessionAttributes("id")
 public class RequestController {
 
     /* title. 요청 시 값을 전달 받는 방법 */
@@ -118,10 +121,7 @@ public class RequestController {
     @GetMapping("login")
     public void login() {}
 
-    /* comment.
-    *   HttpSession 객체 이용해서 요청 값 저장하기
-    *
-    * */
+    /* comment. HttpSession 객체 이용해서 요청 값 저장하기 */
     @PostMapping("login1")
     public String sessionTest(HttpSession session, @RequestParam String id) {
 
@@ -138,6 +138,34 @@ public class RequestController {
 
         return "request/loginResult";
     }
+
+    /* comment.
+    *   @SessionAttributes 를 이용한 session 에 값 담기
+    *   클래스 레벨에 @SessionAttributes 을 사용하여
+    *   session 에 담을 key 값을 설정해두면
+    *   Model 영역에 해당 key 로 값이 추가되는 경우 자동으로 session 에 등록해준다. */
+    @PostMapping("login2")
+    public String sessionTest2(Model model, @RequestParam String id) {
+
+                        // 클래스에 @SessionAttributes 어노테이션에 부여한 이름과 동일해야함
+        model.addAttribute("id", id);
+
+        return "request/loginResult";
+    }
+
+    /* comment.
+    *   SessionAttributes 방식은 session 의 상태를 관리하는
+    *   SessionStatus 객체의 setComplete() 메소드를 사용해야 세션을 강제로 만료시킬 수 있다. */
+    @GetMapping("logout2")
+    public String logout2(SessionStatus sessionStatus){
+
+        sessionStatus.setComplete();
+
+        return "request/loginResult";
+    }
+
+    @GetMapping("body")
+    public void body() {}
 
 
 }
