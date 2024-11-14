@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>index.html 을 대신 할 메인페이지</title>
+</head>
+<body>
+    <h1>View Resolver 를 이용한 뷰 페이지 렌더링</h1>
+    <hr>
+    <h3>문자열로 view 이름 반환하기</h3>
+    <button onclick="location.href='string'">문자열로 view 반환</button>
+    <hr>
+
+    <h3>문자열로 redirect 하기</h3>
+    <button onclick="location.href='string-redirect'">문자열로 redirect</button>
+    <hr>
+
+    <h3>문자열로 view 이름 반환하면서 redirect 시 값 유지하기</h3>
+    <button onclick="location.href='string-redirect-attr'">redirect 시 값 유지</button>
+    <script>
+        const flashMessage = `[[${flashMessage}]]`;
+        console.log(flashMessage);
+        if(flashMessage) {
+            alert(flashMessage);
+        }
+    </script>
+
+</body>
+</html>
