@@ -3,6 +3,7 @@ package com.ohgiraffers.viewresolver;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -55,4 +56,28 @@ public class ResolverController {
         return "redirect:/";
     }
 
+    /* comment.
+    *   ModelAndView 는 Model 과 View 를 합친 개념이다.
+    *   값을 집어넣을 수도 있고, 화면을 결정 지을 수도 있다. */
+    @GetMapping("modelandview")
+    public ModelAndView modelAndViewReturn(ModelAndView mv) {
+
+        // Model 객체처럼 환면에 쓰일 데이터를 넣을 수 있다.
+        mv.addObject("forwardMessage", "ModelAndView 를 이용해서 반환");
+
+        // 문자열로 이동하고 싶은 view 페이지를 지정할 수 있다.
+        mv.setViewName("result");
+
+        return mv;
+    }
+
+    @GetMapping("modelandview-redirect-attr")
+    public ModelAndView mvRedirectAttr(ModelAndView mv, RedirectAttributes attr) {
+
+        attr.addFlashAttribute("flashMessage2","ModelAndView redirect 시 값 유지");
+
+        mv.setViewName("redirect:/");
+
+        return mv;
+    }
 }
