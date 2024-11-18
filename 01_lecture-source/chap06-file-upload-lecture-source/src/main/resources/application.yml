@@ -1,9 +1,11 @@
 spring:
   servlet:
     multipart:
-      # ??? ??? ?? ?? ??
+      # 파일을 가지고 있을 경로 설정
       location: C:\Lecture\10_spring-web-mvc\01_lecture-source\chap06-file-upload-lecture-source
-      # ?? ? ??? ?? ?? ??
+      # 저장 할 파일의 최대 크기 설정
       max-file-size: 10MB
-      # ?? ? ?? ? ??? ?? ?? ??
+      # 요청 시 가능한 파일의 최대 크기 설정
       max=request-size: 10MB
+  mvc:
+    static-path-pattern: /static/**

@@ -18,7 +18,7 @@ public class FileController {
 
     @Autowired
     /* comment.
-     *   yml 파일에 작성한 value 를 읽어드리기 위한 준비 */
+     *   yml 파일에 작성한 value 를 읽어들이기 위한 준비 */
     private ResourceLoader resourceLoader;
 
     @PostMapping("single-file")
@@ -71,7 +71,7 @@ public class FileController {
 
         model.addAttribute("message", "파일 업로드 성공!");
         model.addAttribute("img", "static/img/single/" + savedName);
-        
+
 
         return "result";
     }
