@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -79,9 +80,45 @@ public class FileController {
 
     @PostMapping("multi-file")
     public String multiFile(@RequestParam List<MultipartFile> multiFile,
-                            String description, Model model){
+                            String description, Model model) throws IOException {
 
-        
+        /* index 1. 파일을 저장할 위치 설정 */
+        Resource resource = resourceLoader.getResource("classpath:static/img/multi");
+
+        String filePath = null;
+
+        if(!resource.exists()) {
+            String root = "src/main/resources/static/img/multi";
+            File file = new File(root);
+            // make directory 의 약자
+            file.mkdirs();
+
+            // 만든 폴더의 경로를 filePath 변수에 담아주기
+            filePath = file.getAbsolutePath();
+        } else {
+            // 디렉토리가 만들어진 적이 있다면
+            filePath = resourceLoader.getResource("classpath:static/img/multi")
+                    .getFile().getAbsolutePath();
+        }
+
+        /* index 2. 멀티 파일 변경 처리 */
+        List<FileDTO> files = new ArrayList<>();
+        List<String> savedFiles = new ArrayList<>();
+
+        for(MultipartFile file : multiFile) {
+
+            String originFileName = file.getOriginalFilename();
+            // 확장자 떼주기
+            String ext = originFileName.substring(originFileName.lastIndexOf("."));
+            String savedName = UUID.randomUUID().toString().replace("-", "") + ext;
+
+            files.add(new FileDTO(originFileName, savedName, filePath, description));
+            file.transferTo(new File(filePath + "/" + savedName));
+            savedFiles.add("static/img/multi/" + savedName);
+        }
+
+        model.addAttribute("message", "파일 업로드 성공!~");
+        model.addAttribute("imgs", savedFiles);
 
         return "result";
     }

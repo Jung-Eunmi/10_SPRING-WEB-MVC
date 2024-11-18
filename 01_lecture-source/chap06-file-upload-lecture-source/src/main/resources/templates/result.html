@@ -10,5 +10,11 @@
     <div th:if="${img != null}">
         <img th:src="${img}" width="300" height="300">
     </div>
+    <div th:else>
+        <!-- each 는 향상된 For 문 처럼 여러값을 : 앞에 있는 변수명에 담아줌 -->
+        <div th:each="img : ${imgs}">
+            <img th:src="${img}" width="300" height="300">
+        </div>
+    </div>
 </body>
 </html>
