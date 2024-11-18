@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -72,6 +73,15 @@ public class FileController {
         model.addAttribute("message", "파일 업로드 성공!");
         model.addAttribute("img", "static/img/single/" + savedName);
 
+
+        return "result";
+    }
+
+    @PostMapping("multi-file")
+    public String multiFile(@RequestParam List<MultipartFile> multiFile,
+                            String description, Model model){
+
+        
 
         return "result";
     }

@@ -9,4 +9,3 @@ spring:
       max=request-size: 10MB
   mvc:
     static-path-pattern: /static/**
-    
