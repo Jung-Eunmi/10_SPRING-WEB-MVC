@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Expression</title>
+</head>
+<body>
+    <h1>표현식</h1>
+<!--  -->
+<!--    표현식의 종류-->
+<!--     1. 변수 표현식 ${}-->
+<!--     2. 선택 변수 표현식 *{}-->
+<!--     3. 메세지 표현식 #{}-->
+<!--     4. 링크 표현식 @{}-->
+<!--     5. 조각 표현식 ~{}-->
+<!--     6. 인라인 표현식 [[...]], [(...)]-->
+<!--   -->
+    <h3>표현식 - 변수 표현식 ${...}</h3>
+    <!--
+        url 에 쿼리스트링 파라미터로 넘겨받는 값은 param 이라는 용어에 저장된다.
+        추가적으로 session 에 setAttribute 로 담아 둔 값은 session 이라는 용어에 저장된다.
+    -->
+    <p th:text="${param.title}"></p>
+    <p th:text="${param.no[0]}"></p>
+    <p th:text="${param.no[1]}"></p>
+    <hr>
+
+    <h3>표현식 - 메세지 표현식 #{...}</h3>
+
+</body>
+</html>
