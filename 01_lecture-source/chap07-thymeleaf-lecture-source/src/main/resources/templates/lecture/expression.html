@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Expression</title>
-                <!-- css 하위의 common.css 의 스타일을 먹일 수 있음 -->
+    <!-- stylesheet = css 파일이라는 것을 알려줌, css 하위의 common.css 의 스타일을 먹일 수 있음 -->
     <link rel="stylesheet" th:href="@{/css/common.css}">
 </head>
 <body>
@@ -111,5 +111,6 @@
         <p th:text="|성별 = *{gender}|"></p>
         <p th:text="|주소 = *{address}|"></p>
     </th:block>
+
 </body>
 </html>
