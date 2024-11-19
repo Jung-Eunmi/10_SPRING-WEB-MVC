@@ -14,11 +14,15 @@ public class LectureController {
     @GetMapping("expression")
     public ModelAndView expression(ModelAndView mv) {
 
+        mv.addObject("member", new MemberDTO("정은미", 30, '여', "경기도 파주시"));
+
+        mv.addObject("hello", "hi~<h2>타임리프</h2>");
         // 요청받은 것을 반환 해 줄 뷰에 대한 경로(우리가 지정 한 이름으로 templates 에 .html 로 만들어야 함)
         mv.setViewName("lecture/expression");
 
         return mv;
     }
+
 
 
 }
