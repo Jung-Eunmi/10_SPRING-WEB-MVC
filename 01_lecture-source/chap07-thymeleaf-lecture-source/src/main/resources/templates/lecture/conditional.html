@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Conditional</title>
+</head>
+<body>
+    <h1>제어문</h1>
+    <h2>th:if, th:unless</h2>
+    <p>
+        th:if => 변수 표현식을 활용해서 조건식으로 결과가 ture 일 때 해당 태그의 내용이 나온다.
+        th:unless => 표현식의 조건식 결과가 false 일때 나온다.
+    </p>
+    <p th:if="${ num > 0 }" th:text="|${num} 은 0 보다 크다.|"></p>
+    <!-- false 여서 화면에 나타나지 않음(무시 됨) -->
+    <p th:if="${ num < 0 }">넘어온 값은 0보다 작습니다.</p>
+    <!-- false 여서 화면에 나타남 -->
+    <p th:unless="${ num < 0}">넘어온 값은 0보다 작다.</p>
+
+    <th:block th:if="${str == '사과'}">
+        
+    </th:block>
+</body>
+</html>
