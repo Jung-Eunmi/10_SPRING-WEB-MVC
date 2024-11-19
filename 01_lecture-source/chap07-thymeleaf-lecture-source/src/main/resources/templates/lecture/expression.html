@@ -38,6 +38,7 @@
     <p th:text="#{value}"></p>
     <hr>
 
+    <!-- 프로젝트 : 메인화면으로 누르면 가지게 할 수 있다. -->
     <h3>표현식 - 링크 표현식 @{...}</h3>
     <a th:href="@{/}">메인으로</a>
     <hr>
@@ -60,7 +61,7 @@
                                    단순히 공유할 값을 사용 할 공간이라고 생각하면 된다. -->
     <h3>th:block</h3>
     <th:block th:object="${member}">
-        <p th:text="age"></p>
+        <p th:text="*{age}"></p>
     </th:block>
     <hr>
 
@@ -110,6 +111,5 @@
         <p th:text="|성별 = *{gender}|"></p>
         <p th:text="|주소 = *{address}|"></p>
     </th:block>
-
 </body>
 </html>
