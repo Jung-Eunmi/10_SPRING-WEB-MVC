@@ -7,6 +7,7 @@
 </head>
 <body>
     <h1>표현식</h1>
+    <hr>
 <!--  -->
 <!--    표현식의 종류-->
 <!--     1. 변수 표현식 ${}-->
@@ -27,6 +28,18 @@
     <hr>
 
     <h3>표현식 - 메세지 표현식 #{...}</h3>
+    <!--
+        messages.properties 에 작성 한 key 값 #{} 에 담기
+        resource 하위에 messages.properties 파일을 읽어들일 수 있다.
+        주의점은 위치(resource 하위)와 이름(messages.properties)이 다르면 인식할 수 없다.
+    -->
+    <p th:text="#{value}"></p>
+    <hr>
+
+    <h3>표현식 - 링크 표현식 @{...}</h3>
+    <a th:href="@{/}">메인으로</a>
+
+
 
 </body>
 </html>
