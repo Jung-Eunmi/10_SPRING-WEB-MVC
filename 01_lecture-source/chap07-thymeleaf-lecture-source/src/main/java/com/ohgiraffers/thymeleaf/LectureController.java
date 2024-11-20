@@ -77,4 +77,16 @@ public class LectureController {
         return mv;
     }
 
+    @GetMapping("fragment")
+    public ModelAndView fragment(ModelAndView mv) {
+
+        mv.addObject("test", "value");
+        mv.addObject("test2", "value2");
+
+        // setViewName 을 사용하면 자동으로 resources/templates 가 앞에 붙고 우리가 쓴 경로 끝에 .html 이 붙는다.
+        mv.setViewName("lecture/fragment");
+
+        return mv;
+    }
+
 }

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fragment</title>
+    <style>
+        .header {
+            color: red;
+        }
+
+        .footer {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+    <!--
+        comment.
+            th:replace 는 해당 영역에 있는 코드를 대체하는 Fragment 를 호출하는 문법이다.
+            기존의 코드를 지우고 불러 온 Fragment 로 대체한다.
+    -->
+                        <!-- 쓰려고 하는 fragment 경로 입력 후 :: 뒤에 이름을 입력 -->
+    <header th:replace="~{/common/header :: headerFragment}">
+        <h1>Header 영역</h1> <!-- 'Header 영역'이라는 문구가 'Fragment Header' 로 대체 됨-->
+    </header>
+    <aside th:replace="~{/common/aside :: asideFragment}"></aside>
+    <main>
+        <aticle>
+            <section>
+                <h1>메인 내용 작성 영역</h1>
+            </section>
+        </aticle>
+    </main>
+    <footer>
+        <h2>Footer 영역</h2>
+    </footer>
+</body>
+</html>
