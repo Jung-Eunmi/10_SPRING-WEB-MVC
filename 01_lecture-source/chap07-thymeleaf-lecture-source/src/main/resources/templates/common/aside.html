@@ -6,10 +6,10 @@
     <title>Aside</title>
 </head>
 <body>
-    <aside th:fragment="asideFragment" class="aside">
+    <aside th:fragment="asideFragment(parameter1, parameter2)" class="aside">
         <ul>
-            <li>사이드 메뉴1</li>
-            <li>사이드 메뉴2</li>
+            <li th:text="${parameter1}"></li>
+            <li th:text="${parameter2}"></li>
         </ul>
     </aside>
 </body>
