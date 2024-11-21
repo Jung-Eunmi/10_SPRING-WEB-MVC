@@ -1,0 +1,19 @@
+#Tab 1 == .
+
+# port number default 8080 -> 7777
+server:
+  port: 7777
+
+# spring - mysql driver config
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/menudb
+    username: ohgiraffers
+    password: ohgiraffers
+
+# mybatis mapper.xml file -> IoC container (Bean insert)
+mybatis:
+  # mappers/*.xml : mappers Directory/.xml
+  # mappers/**/*.xml : mappers Directory/Directory/.xml
+  mapper-locations: mappers/**/*.xml
