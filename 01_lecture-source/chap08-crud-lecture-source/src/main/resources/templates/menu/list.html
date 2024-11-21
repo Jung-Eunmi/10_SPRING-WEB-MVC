@@ -6,7 +6,12 @@
     <title>MenuList</title>
 </head>
 <body>
-    <h1>MenuList</h1>
+    <script>
+        const message = `[[${successMessage}]]`;
+        if(message) {
+            alert(message)
+        }
+    </script>
     <table border="1">
         <tr>
             <th>메뉴번호</th>
@@ -17,7 +22,9 @@
         </tr>
         <!-- 자동으로 menuList 의 크기까지 반복 -->
         <tr th:each="menu : ${menuList}">
-            <td th:text="${menu.code}"></td>
+            <td>
+                <a th:href="@{/menu/code(code=${menu.code})}" th:text="${menu.code}"></a>
+            </td>
             <td th:text="${menu.name}"></td>
             <td th:text="${menu.price}"></td>
             <td th:text="${menu.categoryCode}"></td>

@@ -15,4 +15,8 @@ public interface MenuMapper {
     List<MenuDTO> findAllMenus();
 
     List<CategoryDTO> findAllCategory();
+
+    void registNewMenu(MenuDTO newMenu);
+
+    MenuDTO selectMenuCode(String code);
 }
