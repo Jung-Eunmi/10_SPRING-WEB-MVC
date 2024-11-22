@@ -42,7 +42,7 @@
         FROM
             TBL_CATEGORY
     </select>
-
+                                <!-- 전달인자가 있을 때 parameterType 사용  -->
     <insert id="registNewMenu" parameterType="com.ohgiraffers.crud.menu.model.dto.MenuDTO">
         insert into tbl_menu
         (
@@ -72,4 +72,42 @@
         WHERE
             MENU_CODE = #{code}
     </select>
+
+    <!-- join 한 resultMap 방법 association(조인 한 DTO 변수명), javaType(조인 한 DTO 경로) -->
+    <resultMap id="joinResultMap" type="com.ohgiraffers.crud.menu.model.dto.MenuAndCategoryDTO">
+        <id property="code" column="menu_code"/>
+        <result property="name" column="menu_name"/>
+        <result property="price" column="menu_price"/>
+        <result property="orderableStatus" column="orderable_status"/>
+        <association property="categoryDTO" javaType="com.ohgiraffers.crud.menu.model.dto.CategoryDTO">
+            <id property="code" column="category_code"/>
+            <result property="name" column="category_name"/>
+            <result property="refCategoryCode" column="ref_category_code"/>
+        </association>
+    </resultMap>
+
+    <select id="findAllMenuAndCategory" resultMap="joinResultMap">
+        SELECT
+            A.MENU_CODE,
+            A.MENU_NAME,
+            A.MENU_PRICE,
+            A.ORDERABLE_STATUS,
+            B.*
+        FROM
+            TBL_MENU A
+        JOIN
+            TBL_CATEGORY B
+        ON
+            (A.CATEGORY_CODE = B.CATEGORY_CODE)
+        WHERE
+            A.ORDERABLE_STATUS = 'Y'
+    </select>
+
+    <delete id="deleteMenu" parameterType="int">
+        DELETE
+        FROM
+            TBL_MENU
+        WHERE
+            MENU_CODE in (#{menuCode})
+    </delete>
 </mapper>
