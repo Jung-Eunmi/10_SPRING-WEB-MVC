@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>update</title>
+</head>
+<body>
+    <form action="/menu/insert" method="post">
+        <label>메뉴이름 : <input type="text" name="name"></label><br>
+        <label>메뉴가격 : <input type="number" name="price"></label><br>
+        <label>카테고리코드 : </label>
+        <select name="categoryCode" id="categoryCode"></select><br>
+        <label>판매상태 : </label>
+        <select name="orderableStatus">
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select><br>
+        <input type="submit" value="전송">
+    </form>
+
+    <script>
+        fetch("/menu/category").then(res => res.json()).then(date => {
+
+        console.log(date)
+        const $categoryCode = document.getElementById("categoryCode");
+        for(let index in date){
+            const $option = document.createElement("option")
+            $option.value = date[index].code;
+            $option.textContent = date[index].name;
+            $categoryCode.appendChild($option)
+        }
+
+        })
+    </script>
+</body>
+</html>

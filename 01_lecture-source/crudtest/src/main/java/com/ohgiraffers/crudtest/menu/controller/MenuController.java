@@ -1,13 +1,13 @@
 package com.ohgiraffers.crudtest.menu.controller;
 
+import com.ohgiraffers.crudtest.menu.model.dto.CategoryDTO;
 import com.ohgiraffers.crudtest.menu.model.dto.MenuDTO;
 import com.ohgiraffers.crudtest.menu.model.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -22,7 +22,8 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @GetMapping("/all")
+    // 전체 메뉴 조회
+    @GetMapping("all")
     public String allMenu(Model model){
 
         List<MenuDTO> menuList = menuService.allMenu();
@@ -34,10 +35,11 @@ public class MenuController {
         return "/menu/all";
     }
 
-    @GetMapping("/code")
+    // 코드로 메뉴 조회
+    @GetMapping("code")
     public void menuCode(){}
 
-    @PostMapping("/code")
+    @PostMapping("code")
     public String menu(int menuCode, Model model){
 
         MenuDTO menu = menuService.oneMenu(menuCode);
@@ -46,9 +48,23 @@ public class MenuController {
         return "/menu/menuByCode";
     }
 
-    @GetMapping("/update")
-    public void newMenu(){}
+    // 메뉴 추가
+    @GetMapping("insert")
+    public void insertPage(){}
 
+    @GetMapping(value = "category", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public List<CategoryDTO> findCategoryList(){
+        return menuService.findAllCategory();
+    }
+
+    @PostMapping("insert")
+    public String insertMenu(@ModelAttribute MenuDTO menu) {
+
+        menuService.insertMenu(menu);
+
+        return "redirect:/menu/all";
+    }
 
 
 

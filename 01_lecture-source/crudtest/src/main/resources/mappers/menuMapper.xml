@@ -12,6 +12,13 @@
         <result property="orderableStatus" column="orderable_status"/>
     </resultMap>
 
+    <resultMap id="category" type="com.ohgiraffers.crudtest.menu.model.dto.CategoryDTO">
+        <id property="code" column="category_code"/>
+        <result property="name" column="category_name"/>
+        <result property="refCategoryCode" column="ref_category_code"/>
+    </resultMap>
+
+    <!-- 전체 조회 -->
     <select id="allMenu" resultMap="menuResultMap">
         SELECT
             *
@@ -21,6 +28,7 @@
             ORDERABLE_STATUS = 'Y'
     </select>
 
+    <!-- 메뉴코드로 조회 -->
     <select id="oneMenu" resultMap="menuResultMap">
         SELECT
             *
@@ -30,5 +38,28 @@
             MENU_CODE = #{menuCode}
     </select>
 
+    <select id="findAllCategory" resultMap="category">
+        SELECT
+            *
+        FROM
+            TBL_CATEGORY
+    </select>
+
+    <insert id="insertMenu" parameterType="com.ohgiraffers.crudtest.menu.model.dto.MenuDTO">
+        INSERT INTO TBL_MENU
+        (
+            menu_name,
+            menu_price,
+            category_code,
+            orderable_status
+        )
+        VALUES
+        (
+            #{name},
+            #{price},
+            #{categoryCode},
+            #{orderableStatus}
+        )
+    </insert>
 
 </mapper>
