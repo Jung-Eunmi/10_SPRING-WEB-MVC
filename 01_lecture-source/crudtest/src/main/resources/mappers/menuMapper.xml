@@ -24,8 +24,6 @@
             *
         FROM
             TBL_MENU
-        WHERE
-            ORDERABLE_STATUS = 'Y'
     </select>
 
     <!-- 메뉴코드로 조회 -->
